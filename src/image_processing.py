@@ -4,6 +4,7 @@ from PIL import Image
 import natsort
 import glob
 import os,sys
+import matplotlib.pyplot as plt
 from typing import Tuple
 
 
@@ -38,7 +39,7 @@ def load_dataset(directory_path: str, labels_path: str) -> Tuple[np.ndarray, lis
     """
     print(f"Grabbing images from {directory_path} and labels from {labels_path}")
     cards= []
-    for f in glob.glob(directory_path + "*" ):
+    for f in natsort.natsorted(glob.glob(directory_path + "*" )):
         cards.append(_load_image(f))
         print(f)
     return cards
@@ -47,4 +48,5 @@ if __name__ == "__main__":
     print("Testing image loading...")
     ##_load_image("..\\resources\\data\\0.jpg")
     cards = load_dataset("..\\resources\\data\\", "..\\resources\\labels.txt")
-    print(cards)
+    plt.imshow(cards[0])
+    plt.show()
