@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import natsort
 import glob
-import os,sys
+import os, sys, csv
 import matplotlib.pyplot as plt
 from typing import Tuple
 
@@ -38,15 +38,31 @@ def load_dataset(directory_path: str, labels_path: str) -> Tuple[np.ndarray, lis
 
     """
     print(f"Grabbing images from {directory_path} and labels from {labels_path}")
+    
+    # Loads in the images as numpy arrays and stores them in an array called `cards`
     cards= []
     for f in natsort.natsorted(glob.glob(directory_path + "*" )):
         cards.append(_load_image(f))
         print(f)
-    return cards
+    
+    # Loads in our labels and stores them in an array called `labels`
+    labels = []
+    with open(labels_path, "r") as fr:
+        reader = csv.reader(fr)
+        for row in reader:
+            labels.append(row[1])
+
+    # Convert both to numpy arrays and return them as a tuple
+    return np.asarray(cards), np.asarray(labels)
     
 if __name__ == "__main__":
     print("Testing image loading...")
-    ##_load_image("..\\resources\\data\\0.jpg")
-    cards = load_dataset("..\\resources\\data\\", "..\\resources\\labels.txt")
-    plt.imshow(cards[0])
-    plt.show()
+
+    # Get our cards and labels as numpy arrays
+    cards, labels = load_dataset("..\\resources\\data\\", "..\\resources\\labels.txt")
+    
+    # Uncomment if we want to see the images
+    # plt.imshow(cards[0])
+    # plt.show()
+
+    print(f"labels: {labels}")
