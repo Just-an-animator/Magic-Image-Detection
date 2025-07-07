@@ -45,7 +45,7 @@ class TypeInferencer:
         self.model.add(layers.Dense(7))
 
         self.model.compile(optimizer='adam',
-              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
     
     def train(self, images: np.ndarray, labels: np.ndarray):
@@ -58,7 +58,7 @@ class TypeInferencer:
         labels : np.ndarray
             A list of labels    
         """
-        res = self.model.fit(images, labels, epochs=10)
+        res = self.model.fit(images, labels, epochs=100, batch_size=1, shuffle=True)
         return res
 
     def inference(self, image: np.ndarray) -> np.ndarray:
@@ -74,8 +74,7 @@ class TypeInferencer:
         res : np.ndarray
             The inference results as a one hot encoded array
         """
-        print("We are running inference...")
-        pass
+        return self.model.predict(image)
     
     def get_summary(self,):
         """Get the summary of the model.
