@@ -33,7 +33,7 @@ class TypeInferencer:
         self.model = models.Sequential()
 
         # Add the layers
-        self.model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3)))
+        self.model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(64,64,3)))
         self.model.add(layers.MaxPooling2D((2,2)))
         self.model.add(layers.Conv2D(64, (3, 3), activation='relu'))
         self.model.add(layers.MaxPooling2D((2, 2)))
@@ -43,6 +43,10 @@ class TypeInferencer:
         
         # We have 7 classes
         self.model.add(layers.Dense(7))
+
+        self.model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
     
     def train(self, images: np.ndarray, labels: np.ndarray):
         """Train the model.
@@ -54,8 +58,8 @@ class TypeInferencer:
         labels : np.ndarray
             A list of labels    
         """
-        print("We training")
-        pass
+        res = self.model.fit(images, labels, epochs=10)
+        return res
 
     def inference(self, image: np.ndarray) -> np.ndarray:
         """Run inference on an image.
