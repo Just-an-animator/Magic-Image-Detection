@@ -40,17 +40,16 @@ def load_dataset(directory_path: str, labels_path: str) -> Tuple[np.ndarray, lis
     print(f"Grabbing images from {directory_path} and labels from {labels_path}")
     
     # Loads in the images as numpy arrays and stores them in an array called `cards`
-    cards= []
-    for f in natsort.natsorted(glob.glob(directory_path + "*" )):
-        cards.append(_load_image(f))
-        print(f)
+    cards= [] # 
+    for f in natsort.natsorted(glob.glob(directory_path + "*" )): # Iterate through a sorted list of file names
+        cards.append(_load_image(f)) # Load the image at the file path as a numpy array
     
     # Loads in our labels and stores them in an array called `labels`
-    labels = []
-    with open(labels_path, "r") as fr:
-        reader = csv.reader(fr)
-        for row in reader:
-            labels.append(row[1])
+    labels = [] 
+    with open(labels_path, "r") as fr: # Open the labels path and read in the bytes
+        reader = csv.reader(fr) # Create a CSV reader to read row-by-row
+        for row in reader: # Read row by row
+            labels.append(row[1]) # Add the 1st column from the row, which is our color.
 
     # Convert both to numpy arrays and return them as a tuple
     return np.asarray(cards), np.asarray(labels)
