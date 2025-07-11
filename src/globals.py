@@ -25,5 +25,5 @@ LABEL_DICT = {
     "grixis": 23,
     "bant": 24,
     "jund": 25,
-    "naya": 27
+    "naya": 26
 }
