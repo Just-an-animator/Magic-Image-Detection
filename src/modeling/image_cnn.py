@@ -68,7 +68,7 @@ class TypeInferencer:
 
         # Add a final dense layer, this time "converging" to 7, which will be our number of labels. 
         # Softmax results in "probabilities" of each label type. We then find the maximum of these probabilities and that is our best label.
-        self.model.add(layers.Dense(7, activation='softmax'))
+        self.model.add(layers.Dense(26, activation='softmax'))
     
 
         self.model.compile(optimizer='adam',

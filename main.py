@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     # Get the data
     cards, labels = load_dataset(directory_path="./resources/data/",
-                                 labels_path="./resources/labels.csv", max_size=8)
+                                 labels_path="./resources/labels.csv")
     print(f"Cards vs labels: {np.shape(cards)}, {np.shape(labels)}",)
 
     # Get the model
