@@ -3,7 +3,7 @@
 ![MagicCNN](resources/docs/text-1752255948540.png)
 
 Library and tools to extract information from Magic: The Gathering cards
-using traditional AI methods. The goal of this project 
+using traditional AI methods.
 ## Current functionality:
 * Classify card-type based on color / clan (White, Esper, Abzan, etc) using a multiclass CNN.
 
@@ -54,6 +54,37 @@ with an incremental integer as the file name (i.e. `0.jpg` for the 0th card).
 
 Labels are stored in a simple CSV file in `resources/labels.csv`. This CSV only has
 two columns: one for the integer section of the filename (the `0` in `0.jpg`) and the color. The color should be a string name, and is mapped to an integer value in `globals.py`.
+
+The color / clan guide goes as follows:
+| Name    | Color pairings | Index |
+| -------- | ------- | ------- |
+| white  | white    | 0 |
+| red | red    | 1| 
+| green | green | 2 |
+| blue | blue | 3 |
+| black | black | 4 |
+| gold | gold | 5 | 
+| colorless | colorless | 6 |
+| gruul | Red, Green | 7 |
+| simic | Green, Blue | 8 |
+| golgari | Black, Green | 9 |
+| selesyna | White, Green | 10 |
+| dimir | Blue, black | 11 |
+| azorius | White, Blue | 12 |
+| izzet | Blue, Red | 13 | 
+| boros | White, Red | 14 |
+| rakdos | Black, Red | 15 |
+| orzhov | White, Black | 16 |
+| mardu | Red, White, Black | 17 |
+| jeskai | Blue, Red, White | 18 | 
+| abzan | White, Black, Green | 19 |
+| sultai | Black, Green, Blue | 20 |
+| temur | Green, Blue, Red | 21 |
+| esper | White, Blue, Black | 22 |
+| grixis| Blue, Black, Red | 23 |
+| bant | Green, White, Blue | 24 |
+| jund | Black, Red, Green | 25 |
+| naya | Red, Green, White | 26 |
 
 ## Modelling
 tbd
