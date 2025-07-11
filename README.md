@@ -87,4 +87,48 @@ The color / clan guide goes as follows:
 | naya | Red, Green, White | 26 |
 
 ## Modelling
-tbd
+Currently, all modelling work is done in `tensorflow<2.11`, primarily for python
+3.10 compatability. We use `keras` for the current modelling, with `numpy` and 
+`pillow` use for preprocessing and matrix manipulation. 
+
+Models should be wrapped in a base `TypeInferencer` class to keep method
+signatures consistent across different model types. This will most definitely
+be base-classed in the future.
+
+The core model, at the moment, is a simple CNN with the following definition:
+```
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d (Conv2D)             (None, 64, 64, 32)        896       
+                                                                 
+ max_pooling2d (MaxPooling2D  (None, 32, 32, 32)       0         
+ )                                                               
+                                                                 
+ conv2d_1 (Conv2D)           (None, 32, 32, 64)        18496     
+                                                                 
+ max_pooling2d_1 (MaxPooling  (None, 16, 16, 64)       0         
+ 2D)                                                             
+                                                                 
+ conv2d_2 (Conv2D)           (None, 16, 16, 128)       73856     
+                                                                 
+ max_pooling2d_2 (MaxPooling  (None, 8, 8, 128)        0         
+ 2D)                                                             
+                                                                 
+ flatten (Flatten)           (None, 8192)              0         
+                                                                 
+ dense (Dense)               (None, 128)               1048704   
+                                                                 
+ dropout (Dropout)           (None, 128)               0         
+                                                                 
+ dense_1 (Dense)             (None, 27)                3483      
+                                                                 
+=================================================================
+Total params: 1,145,435
+Trainable params: 1,145,435
+Non-trainable params: 0
+```
+
+Future models (segmentation, extraction, etc) will most definitely be complicated
+but will continue to be documented here.
