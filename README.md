@@ -8,7 +8,7 @@ using traditional AI methods.
 ## Table of Contents  
 [Functionality](#functionality)  
 [Setup](#setup)  
-[Running](#running)
+[Running](#running)     
 [Data](#data)   
 [Modelling](#modelling)
 
