@@ -21,6 +21,8 @@ if __name__ == "__main__":
 
     inferencer.train(cards, ohe_labels, epochs=100)
 
+    inferencer.save_weights("/Users/e361818/Projects/pet/Magic-Image-Detection/resources/checkpoints")
+
     # Test on kathril
     katty = np.array([_load_image("./resources/data/0.jpg", target_resize_dims=(64,64))])
     results = np.argmax(inferencer.inference(katty))

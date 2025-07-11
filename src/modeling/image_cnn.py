@@ -1,7 +1,8 @@
-"""Basic CNN inference"""
+"""Basic CNN inference."""
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import numpy as np
+
 
 class TypeInferencer:
     """Define a model that determines card type given an image.
@@ -69,7 +70,6 @@ class TypeInferencer:
         # Add a final dense layer, this time "converging" to 7, which will be our number of labels. 
         # Softmax results in "probabilities" of each label type. We then find the maximum of these probabilities and that is our best label.
         self.model.add(layers.Dense(27, activation='softmax'))
-    
 
         self.model.compile(optimizer='adam',
               loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
