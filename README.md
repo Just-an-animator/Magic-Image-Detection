@@ -4,10 +4,17 @@
 
 Library and tools to extract information from Magic: The Gathering cards
 using traditional AI methods.
-## Current functionality:
+
+## Table of Contents  
+[Functionality](#functionality)  
+[Setup](#setup)  
+[Data](#data)   
+[Modelling](#modelling)
+
+## Functionality
 * Classify card-type based on color / clan (White, Esper, Abzan, etc) using a multiclass CNN.
 
-## Future improvements
+### Future improvements
 * Detect MTG cards live during a webcam feed using OpenCV, and forward the detected card to the CNN.
 * Extract information about the detected card and store it in
 a local database (Mana cost, card type, abilities, etc)
