@@ -78,8 +78,6 @@ class TypeInferencer:
     def save_weights(self, model_checkpoint_path: str = "./"):
         """Save the model weights so we dont have to train the model every
         run.
-
-
         """
         self.model.save_weights(model_checkpoint_path + "/cnn_checkpoints.h5")
 
@@ -135,7 +133,7 @@ class TypeInferencer:
         return self.model.summary()
 
 
-if __name__ == "__main__":""
+if __name__ == "__main__":
     print("Can use keras")
     ti = TypeInferencer()
     ti.create_model()
