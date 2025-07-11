@@ -8,6 +8,7 @@ using traditional AI methods.
 ## Table of Contents  
 [Functionality](#functionality)  
 [Setup](#setup)  
+[Running](#running)
 [Data](#data)   
 [Modelling](#modelling)
 
@@ -52,6 +53,23 @@ Finally pip install the requirements:
 ```
 python3.10 -m pip install -r requirements.txt
 ```
+
+## Running
+To run the system, either use the scripts provided in the `scripts/` directory,
+or use the `main.py` entrypoint. The args go as follows:
+
+| Arg    | Type | Desc | 
+| -------- | ------- | ------- |
+| -h, --help  | flag    | Shows the arguments |
+| --train | flag     | Toggles training of the model |
+| --inference    | flag    | Toggles inference of the model |
+| --epochs `EPOCHS` | int | The number of epochs to train for, if --train is flagged | 
+| --card `CARD` | str | The filepath to the card for inference, if --inference is flagged |
+| --data_dir `DIR` | str | The filepath for the dataset directory |
+| --labels_file `FILE` | str | The filepath for the labels file |
+| --save | flag | Flag to save the model weights |
+| --checkpoint_dir `DIR` | str | The directory to save model weights |
+
 
 ## Data
 All our current training data is pushed up with the repo, but as the project
