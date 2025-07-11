@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     # Get the data
     cards, labels = load_dataset(directory_path="./resources/data/",
-                                 labels_path="./resources/labels.csv")
+                                 labels_path="./resources/labels.csv", max_size=8)
     print(f"Cards vs labels: {np.shape(cards)}, {np.shape(labels)}",)
 
     # Get the model
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # Perform one hot on our labels
     ohe_labels = one_hot_encode(labels)
 
-    inferencer.train(cards, ohe_labels)
+    inferencer.train(cards, ohe_labels, epochs=25)
 
     # Test on kathril
     katty = np.array([_load_image("./resources/data/0.jpg", target_resize_dims=(64,64))])
