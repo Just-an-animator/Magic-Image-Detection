@@ -75,6 +75,27 @@ class TypeInferencer:
               loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
     
+    def save_weights(self, model_checkpoint_path: str = "./"):
+        """Save the model weights so we dont have to train the model every
+        run.
+
+
+        """
+        self.model.save_weights(model_checkpoint_path + "/cnn_checkpoints.h5")
+
+    def load_weights(self, model_checkpoints_path: str = "./cnn_checkpoints.h5"):
+        """ Load the weights of the model so we can run inference and fine tune.
+
+        Parameters
+        ----------
+        model_checkpoints_path : str
+            The checkpoints of the model.
+        """
+        try:
+            self.model.load_weights(model_checkpoints_path)
+        except Exception as e:
+            print(f"Could not load model weights: -- {e}")
+    
     def train(self, images: np.ndarray, labels: np.ndarray, epochs: int = 10, batch_size: int = 1, shuffle: bool = True):
         """Train the model.
 
@@ -83,7 +104,7 @@ class TypeInferencer:
         images : np.ndarray
             A list of loaded images
         labels : np.ndarray
-            A list of labels    
+            A list of labels
         """
         res = self.model.fit(images, labels, epochs=epochs, batch_size=batch_size, shuffle=shuffle)
         return res
@@ -114,7 +135,7 @@ class TypeInferencer:
         return self.model.summary()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":""
     print("Can use keras")
     ti = TypeInferencer()
     ti.create_model()
