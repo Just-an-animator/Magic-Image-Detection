@@ -33,13 +33,13 @@ class TypeInferencer:
         self.model = models.Sequential()
 
         # Add the layers
-        self.model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(64,64,3)))
+        self.model.add(layers.Conv2D(64, (3,3), activation='relu', input_shape=(64,64,3)))
         self.model.add(layers.MaxPooling2D((2,2)))
-        self.model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+        self.model.add(layers.Conv2D(128, (9, 9), activation='relu'))
         self.model.add(layers.MaxPooling2D((2, 2)))
-        self.model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+        self.model.add(layers.Conv2D(128, (3, 3), activation='relu'))
         self.model.add(layers.Flatten())
-        self.model.add(layers.Dense(64, activation='relu'))
+        self.model.add(layers.Dense(128, activation='relu'))
         
         # We have 7 classes
         self.model.add(layers.Dense(7))
@@ -58,7 +58,7 @@ class TypeInferencer:
         labels : np.ndarray
             A list of labels    
         """
-        res = self.model.fit(images, labels, epochs=100, batch_size=1, shuffle=True)
+        res = self.model.fit(images, labels, epochs=10, batch_size=1, shuffle=True)
         return res
 
     def inference(self, image: np.ndarray) -> np.ndarray:
