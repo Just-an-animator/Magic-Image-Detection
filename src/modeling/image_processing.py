@@ -48,7 +48,7 @@ def load_dataset(directory_path: str, labels_path: str, target_resize_dims: set 
         for f in natsort.natsorted(glob.glob(directory_path + "*" ))[:max_size]: # Iterate through a sorted list of file names
             cards.append(_load_image(f)) # Load the image at the file path as a numpy array
     else:
-        for f in natsort.natsorted(glob.glob(directory_path + "*" ))[:max_size]: # Iterate through a sorted list of file names
+        for f in natsort.natsorted(glob.glob(directory_path + "*" )): # Iterate through a sorted list of file names
             cards.append(_load_image(f)) # Load the image at the file path as a numpy array
     # Loads in our labels and stores them in an array called `labels`
     labels = [] 

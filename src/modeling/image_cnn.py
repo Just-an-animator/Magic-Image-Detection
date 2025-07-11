@@ -99,7 +99,7 @@ class TypeInferencer:
         Returns
         -------
         res : np.ndarray
-            The inference results as a one hot encoded array
+            The inference results as a softmax array
         """
         return self.model.predict(image)
     
