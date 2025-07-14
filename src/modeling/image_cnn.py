@@ -2,7 +2,9 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import numpy as np
-
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
 
 class TypeInferencer:
     """Define a model that determines card type given an image.
@@ -26,8 +28,10 @@ class TypeInferencer:
     get_summary -> str
         Gets the summary of the model
     """
-    def __init__(self):
+    def __init__(self, epochs: int = 100):
         self.model: models.Model = None
+        self.history: any = None
+        self.epochs = epochs
     
     def create_model(self,):
         """Create the model"""
@@ -73,13 +77,40 @@ class TypeInferencer:
 
         self.model.compile(optimizer='adam',
               loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
-              metrics=['accuracy', 'loss'])
+              metrics=['accuracy'])
     
     def save_weights(self, model_checkpoint_path: str = "./"):
         """Save the model weights so we dont have to train the model every
         run.
         """
         self.model.save_weights(model_checkpoint_path + "/cnn_checkpoints.h5")
+
+    def plot_metrics(self):
+        """
+        """
+        epochs = range(0, self.epochs)
+        loss = self.history.history["loss"]
+        acc = self.history.history["accuracy"]
+
+        d = {"epochs": epochs, "loss": loss}
+        d2 = {"epochs": epochs, "acc": acc}
+
+        p1 = pd.DataFrame(data=d)
+        p2 = pd.DataFrame(data=d2)
+
+        sns.color_palette("rocket")
+        ax1 = sns.lineplot(x="epochs", y="acc", data=p2)
+        ax1.set_title("Accuracy during 100 training steps")
+        ax1.xaxis.grid(True)
+        ax1.yaxis.grid(True)
+
+        ax1.set_xlabel("# of Epochs")
+        ax1.set_ylabel("Classification Accuracy")
+        # sns.move_legend(ax1, "upper left")
+
+        plt.show()
+
+
 
     def load_weights(self, model_checkpoints_path: str = "./cnn_checkpoints.h5"):
         """ Load the weights of the model so we can run inference and fine tune.
@@ -104,8 +135,8 @@ class TypeInferencer:
         labels : np.ndarray
             A list of labels
         """
-        res = self.model.fit(images, labels, epochs=epochs, batch_size=batch_size, shuffle=shuffle)
-        return res
+        self.history = self.model.fit(images, labels, epochs=epochs, batch_size=batch_size, shuffle=shuffle)
+        return self.history
 
     def inference(self, image: np.ndarray) -> np.ndarray:
         """Run inference on an image.

@@ -44,14 +44,15 @@ if __name__ == "__main__":
         print("Training the model!")
         cards, labels = load_dataset(directory_path=args.data_dir,
                                      labels_path=args.labels_file)
-        inferencer = TypeInferencer()
+        inferencer = TypeInferencer(epochs=args.epochs)
         inferencer.create_model()
         inferencer.get_summary()
         ohe_labels = one_hot_encode(labels)
         inferencer.train(cards, ohe_labels, epochs=args.epochs)
+        inferencer.plot_metrics()
 
         if args.save:
-            inferencer.save_weights(args.chekpoint_dir)
+            inferencer.save_weights(args.checkpoint_dir)
 
     if args.inference:
         inferencer = TypeInferencer()
@@ -61,6 +62,8 @@ if __name__ == "__main__":
         card = np.array([_load_image(args.card, target_resize_dims=(64, 64))])
         res = np.argmax(inferencer.inference(card))
         print(f"Ran inference on {args.card}: got label {res}, {_get_label_name(res)}")
+        inferencer.plot_metrics()
+
 
 
     # # Get the data
