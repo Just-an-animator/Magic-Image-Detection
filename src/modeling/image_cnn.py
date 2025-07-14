@@ -73,7 +73,7 @@ class TypeInferencer:
 
         self.model.compile(optimizer='adam',
               loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
-              metrics=['accuracy'])
+              metrics=['accuracy', 'loss'])
     
     def train(self, images: np.ndarray, labels: np.ndarray, epochs: int = 10, batch_size: int = 1, shuffle: bool = True):
         """Train the model.
